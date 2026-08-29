@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abid Hasan Rashel — Senior Software Engineer</title>
+<meta name="description" content="Curriculum vitae of Abid Hasan Rashel, Senior Software Engineer specialising in React.js and Next.js.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* surfaces */
+    --desk:      #E7EAEC;
+    --paper:     #FDFDFC;
+    --panel:     #F2F7F7;
+
+    /* ink */
+    --ink:       #14222A;
+    --ink-soft:  #465662;
+    --ink-faint: #7B8894;
+
+    /* teal — structure, technology */
+    --teal-deep: #0C3B40;
+    --teal:      #0E5C61;
+    --teal-lit:  #6FD3CB;
+    --teal-wash: #E3EFEF;
+    --teal-line: #C7DEDE;
+
+    /* amber — time, recognition */
+    --amber:      #B06A12;
+    --amber-deep: #8A5210;
+    --amber-wash: #FBF2E3;
+    --amber-line: #EBD8B6;
+
+    --rule:      #E2E6E8;
+    --rule-firm: #C9D0D4;
+
+    --sans:  'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  /* ══ MOTION ═══════════════════════════════════════════
+     Load-in plays once on the masthead; everything below
+     reveals on scroll. JS adds `.js` to <html> and flips
+     `.in` on sections as they enter view — without JS,
+     or with JS disabled, content is simply visible. ══ */
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes widen {
+    from { opacity: 0; transform: scaleX(0); }
+    to   { opacity: 1; transform: scaleX(1); }
+  }
+
+  html.js .masthead-text .name,
+  html.js .masthead-text .role,
+  html.js .portrait,
+  html.js .contact {
+    opacity: 0;
+    animation: rise .7s cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  html.js .masthead-text .name  { animation-delay: .05s; }
+  html.js .masthead-text .role  { animation-delay: .22s; }
+  html.js .portrait             { animation-delay: .1s; }
+  html.js .contact              { animation-delay: .38s; }
+
+  html.js .hero-line {
+    transform-origin: left;
+    animation: widen .8s cubic-bezier(.22,.61,.36,1) forwards;
+    animation-delay: .55s;
+  }
+
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .6s cubic-bezier(.22,.61,.36,1),
+                transform .6s cubic-bezier(.22,.61,.36,1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+  html.js .reveal.in { opacity: 1; transform: none; }
+
+  html.js .post {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity .5s ease, transform .5s ease;
+    transition-delay: var(--post-delay, 0s);
+  }
+  html.js .post.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.js .masthead-text .name,
+    html.js .masthead-text .role,
+    html.js .portrait,
+    html.js .contact,
+    html.js .hero-line,
+    html.js .reveal,
+    html.js .post {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--desk);
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 44px 20px 90px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 2px; }
+  a:focus-visible,
+  button:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+
+  .sheet {
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 1px 2px rgba(20,34,42,.08), 0 20px 44px -22px rgba(20,34,42,.34);
+    overflow: hidden;
+  }
+
+  /* ══ MASTHEAD BAND ═══════════════════════════════════ */
+  .masthead {
+    background: var(--teal-deep);
+    border-bottom: 3px solid var(--amber);
+    padding: 38px 48px 20px;
+  }
+
+  .masthead-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .masthead-text { flex: 1; min-width: 0; }
+
+  .name {
+    font-size: clamp(31px, 5.3vw, 45px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    color: #FFFFFF;
+  }
+
+  .role {
+    margin-top: 11px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.19em;
+    color: var(--teal-lit);
+  }
+
+  .hero-line {
+    margin-top: 14px;
+    width: 46px;
+    height: 2px;
+    background: var(--amber);
+  }
+
+  .portrait {
+    width: 106px;
+    height: 106px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(111,211,203,.5);
+    background: var(--teal);
+    transition: border-color .25s ease, transform .25s ease;
+  }
+  .portrait:hover { border-color: var(--teal-lit); transform: scale(1.03); }
+
+  .contact {
+    margin-top: 24px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,.16);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px 24px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: rgba(255,255,255,.82);
+  }
+
+  .contact span,
+  .contact a { display: inline-flex; align-items: center; gap: 8px; }
+  .contact a { color: rgba(255,255,255,.82); }
+  .contact a:hover { color: var(--teal-lit); text-decoration-color: var(--teal-lit); }
+
+  .contact svg {
+    width: 13px; height: 13px;
+    flex-shrink: 0;
+    stroke: var(--teal-lit);
+    fill: none;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ══ BODY GRID ═══════════════════════════════════════ */
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 262px;
+    align-items: stretch;
+  }
+
+  .main  { padding: 32px 40px 44px 48px; }
+  .aside {
+    padding: 32px 30px 44px 28px;
+    background: var(--panel);
+    border-left: 1px solid var(--teal-line);
+  }
+
+  .col > section + section { margin-top: 26px; }
+
+  /* ══ SECTION HEADS ═══════════════════════════════════ */
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 14px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--teal-line);
+  }
+
+  .head::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .head h2 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--teal-deep);
+  }
+
+  .head.amber { border-bottom-color: var(--amber-line); }
+  .head.amber::before { background: var(--amber); }
+  .head.amber h2 { color: var(--amber-deep); }
+
+  /* ══ PROFILE CALLOUT ═════════════════════════════════ */
+  .profile {
+    background: var(--teal-wash);
+    border-left: 3px solid var(--teal);
+    padding: 15px 19px;
+    font-family: var(--serif);
+    font-size: 14.5px;
+    line-height: 1.58;
+    color: var(--ink-soft);
+  }
+  .profile strong { color: var(--teal-deep); font-weight: 600; }
+
+  /* ══ EMPLOYER + TIMELINE ═════════════════════════════ */
+  .employer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+
+  .employer h3 {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+
+  .tenure {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: var(--amber-deep);
+    background: var(--amber-wash);
+    border: 1px solid var(--amber-line);
+    border-radius: 3px;
+    padding: 3px 9px;
+    white-space: nowrap;
+  }
+
+  .employer-loc {
+    margin-top: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--teal);
+  }
+
+  .timeline {
+    margin-top: 18px;
+    padding-left: 22px;
+    border-left: 2px solid var(--teal-line);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .post { position: relative; }
+
+  .post::before {
+    content: '';
+    position: absolute;
+    left: -28.5px;
+    top: 5px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: 2px solid var(--paper);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+
+  .post.now::before   { background: var(--amber); }
+  .post.entry::before { background: var(--teal-line); }
+
+  .post.now::after {
+    content: '';
+    position: absolute;
+    left: -28.5px;
+    top: 5px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--amber);
+    opacity: .55;
+    animation: pulse-ring 2.4s ease-out infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%   { transform: scale(1);   opacity: .45; }
+    70%  { transform: scale(2.1); opacity: 0; }
+    100% { transform: scale(2.1); opacity: 0; }
+  }
+
+  .post:hover::before { transform: scale(1.25); box-shadow: 0 0 0 3px var(--teal-wash); }
+  .post.now:hover::before { box-shadow: 0 0 0 3px var(--amber-wash); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .post.now::after { animation: none; opacity: .3; }
+  }
+
+  .post-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 2px 14px;
+  }
+
+  .post-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .post.entry .post-title { font-weight: 600; color: var(--ink-soft); }
+
+  .post-dates {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .duties {
+    list-style: none;
+    margin-top: 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .duties li {
+    position: relative;
+    padding-left: 18px;
+    font-family: var(--serif);
+    font-size: 14.5px;
+    line-height: 1.52;
+    color: var(--ink-soft);
+  }
+
+  .duties li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 8px; height: 2px;
+    background: var(--teal-lit);
+  }
+
+  .duties strong { color: var(--teal-deep); font-weight: 600; }
+
+  .stack {
+    margin-top: 18px;
+    padding-top: 13px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .stack em {
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 10.5px;
+    color: var(--teal);
+    background: var(--teal-wash);
+    border: 1px solid var(--teal-line);
+    border-radius: 3px;
+    padding: 3px 9px;
+    transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  .stack em:hover {
+    background: var(--teal);
+    color: #FFFFFF;
+    border-color: var(--teal);
+    transform: translateY(-1px);
+  }
+
+  /* ══ ACHIEVEMENTS ════════════════════════════════════ */
+  .marks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .marks li {
+    position: relative;
+    padding-left: 18px;
+    font-family: var(--serif);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  .marks li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px;
+    width: 8px; height: 2px;
+    background: var(--amber);
+  }
+
+  /* ══ SIDEBAR ═════════════════════════════════════════ */
+  .group + .group { margin-top: 12px; }
+
+  .group-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  .chips span {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal-deep);
+    background: #FFFFFF;
+    border: 1px solid var(--teal-line);
+    border-radius: 3px;
+    padding: 3px 8px;
+    line-height: 1.35;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  .chips span:hover {
+    background: var(--teal-wash);
+    border-color: var(--teal);
+    transform: translateY(-1px);
+  }
+
+  .edu-item {
+    background: #FFFFFF;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--amber);
+    border-radius: 3px;
+    padding: 13px 15px;
+    transition: box-shadow .2s ease, transform .2s ease;
+  }
+  .edu-item:hover {
+    box-shadow: 0 6px 16px -8px rgba(20,34,42,.22);
+    transform: translateY(-1px);
+  }
+
+  .degree { font-size: 13.5px; font-weight: 700; line-height: 1.35; color: var(--ink); }
+  .school { margin-top: 4px; font-size: 12.5px; color: var(--ink-soft); }
+  .stamp {
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: var(--amber-deep);
+  }
+
+  .pair {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 7px 0;
+    border-bottom: 1px dotted var(--teal-line);
+    font-size: 13px;
+  }
+  .pair:last-child { border-bottom: none; }
+  .pair b { font-weight: 600; color: var(--ink); }
+  .pair span {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--teal);
+    background: var(--teal-wash);
+    border-radius: 3px;
+    padding: 2px 7px;
+  }
+
+  .plain { font-size: 13px; line-height: 1.6; color: var(--ink-soft); }
+
+  /* ══ PDF BUTTON (screen only) ════════════════════════ */
+  .save {
+    position: fixed;
+    right: 24px; bottom: 24px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: var(--teal-deep);
+    border: none;
+    border-radius: 3px;
+    padding: 11px 17px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px -6px rgba(12,59,64,.6);
+    transition: background .18s ease, transform .18s ease;
+  }
+  .save:hover { background: var(--amber); transform: translateY(-2px); }
+  .save:active { transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  /* ══ RESPONSIVE ══════════════════════════════════════ */
+  @media (max-width: 820px) {
+    body { padding: 0 0 84px; }
+    .sheet { box-shadow: none; }
+    .masthead { padding: 30px 26px 18px; }
+    .masthead-top { flex-direction: row-reverse; gap: 20px; }
+    .portrait { width: 78px; height: 78px; }
+    .contact { margin-top: 20px; gap: 8px 18px; }
+    .columns { grid-template-columns: 1fr; }
+    .main { padding: 28px 26px 34px; }
+    .aside { padding: 28px 26px 42px; border-left: none; border-top: 3px solid var(--amber); }
+  }
+
+  @media (max-width: 420px) {
+    .masthead-top { flex-direction: column-reverse; align-items: flex-start; }
+  }
+
+  /* ══ PRINT (A4) ══════════════════════════════════════ */
+  @page { size: A4; margin: 0; }
+
+  @media print {
+    html, body {
+      background: #fff;
+      padding: 0;
+      font-size: 10.5pt;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .sheet { max-width: none; box-shadow: none; }
+    .masthead { padding: 11mm 12mm 6mm; }
+    .name { font-size: 25pt; }
+    .role { font-size: 8pt; margin-top: 7px; }
+    .portrait { width: 82px; height: 82px; }
+    .contact { margin-top: 14px; padding-top: 10px; font-size: 7.6pt; gap: 4px 15px; }
+
+    /* Grid can't fragment across printed pages without stranding
+       whole rows on the next page, so print flows as one column. */
+    .columns { display: block; }
+    .main  { padding: 7mm 12mm 4mm; }
+    .aside {
+      padding: 6mm 12mm 9mm;
+      border-left: none;
+      border-top: 1px solid var(--teal-line);
+      background: none;
+    }
+    .col > section + section { margin-top: 15px; }
+
+    .group { break-inside: avoid; page-break-inside: avoid; }
+    .aside .head { margin-top: 2px; }
+    .profile, .duties li, .marks li { font-size: 9.6pt; line-height: 1.42; }
+    .profile { padding: 10px 13px; }
+    .employer h3 { font-size: 12pt; }
+    .post-title { font-size: 10.5pt; }
+    .timeline { gap: 13px; margin-top: 13px; }
+    .duties { gap: 4px; margin-top: 7px; }
+    .marks { gap: 4px; }
+    .stack { margin-top: 12px; padding-top: 9px; gap: 4px; }
+    .stack em { font-size: 7.5pt; padding: 2px 6px; }
+    .chips span { font-size: 8pt; padding: 2px 6px; }
+    .post::before { border-color: #fff; }
+    section, .post, .edu-item { break-inside: avoid; page-break-inside: avoid; }
+    .contact a { color: rgba(255,255,255,.85); }
+    .save { display: none; }
+    .masthead-text .name, .masthead-text .role, .portrait, .contact,
+    .hero-line, .reveal, .post, .post.now::after {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<article class="sheet">
+
+  <!-- ══ MASTHEAD ══════════════════════════════════════ -->
+  <header class="masthead">
+    <div class="masthead-top">
+      <div class="masthead-text">
+        <h1 class="name">Abid Hasan Rashel</h1>
+        <p class="role">Senior Software Engineer</p>
+        <div class="hero-line"></div>
+      </div>
+      <img class="portrait" src="abid.jpeg" alt="Portrait of Abid Hasan Rashel">
+    </div>
+
+    <div class="contact">
+      <a href="mailto:abid.bjit@gmail.com">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+        abid.bjit@gmail.com
+      </a>
+      <a href="tel:+8801639660026">
+        <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9z"/></svg>
+        +880 1639 660026
+      </a>
+      <a href="https://abidsportfolio.netlify.app" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        abidsportfolio.netlify.app
+      </a>
+      <span>
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Basundara R/A, Dhaka 1212, Bangladesh
+      </span>
+    </div>
+  </header>
+
+  <!-- ══ BODY ══════════════════════════════════════════ -->
+  <div class="columns">
+
+    <!-- ── MAIN ──────────────────────────────────────── -->
+    <main class="col main">
+
+      <section class="reveal">
+        <div class="head"><h2>Profile</h2></div>
+        <p class="profile">
+          Senior Software Engineer with <strong>5+ years at BJIT Limited</strong>, promoted from
+          intern to senior while building production React and Next.js applications for enterprise
+          clients. Works across the stack — TypeScript and SCSS on the front, Laravel and SQL behind
+          it — with a focus on what decides whether a product holds up in real use: component
+          architecture, state design, render performance, and accessibility. Now sets frontend
+          standards, runs code review, and mentors engineers across feature teams.
+        </p>
+      </section>
+
+      <section class="reveal">
+        <div class="head"><h2>Experience</h2></div>
+
+        <div class="employer">
+          <h3>BJIT Limited</h3>
+          <span class="tenure">Jan 2021 — Present</span>
+        </div>
+        <p class="employer-loc">Dhaka, Bangladesh · Three roles, promoted twice</p>
+
+        <div class="timeline">
+
+          <div class="post now" style="--post-delay:.05s">
+            <div class="post-line">
+              <h4 class="post-title">Senior Software Engineer</h4>
+              <span class="post-dates">Jul 2025 — Present</span>
+            </div>
+            <ul class="duties">
+              <!-- METRIC: name the number of applications, or their user/traffic scale. -->
+              <li>Own frontend architecture for enterprise web applications on <strong>React.js and Next.js</strong> — component systems, routing strategy, and the state and data-fetching layers beneath them.</li>
+              <!-- METRIC: how many engineers have you mentored? -->
+              <li>Set the team's frontend standards — review conventions, TypeScript patterns, component API design — and mentor junior and mid-level engineers through code review.</li>
+              <li>Define <strong>REST API contracts</strong> with backend teams and model complex data workflows on the client so features stay predictable as scope grows.</li>
+            </ul>
+          </div>
+
+          <div class="post" style="--post-delay:.16s">
+            <div class="post-line">
+              <h4 class="post-title">Software Engineer</h4>
+              <span class="post-dates">Oct 2021 — Jun 2025</span>
+            </div>
+            <ul class="duties">
+              <li>Built and shipped production features across React.js and Next.js applications for enterprise clients, from scoping through release.</li>
+              <!-- METRIC: replace with a real before/after, e.g. "cut LCP from 4.1s to 1.6s". -->
+              <li>Cut load and interaction latency through code splitting, render optimisation, and disciplined bundle management; shipped against <strong>Core Web Vitals</strong>, SEO, and cross-browser accessibility targets.</li>
+              <li>Built and maintained supporting <strong>Laravel/PHP</strong> services and SQL schemas where a feature spanned the full stack.</li>
+              <li>Worked with product managers, UX designers, and QA leads to turn open-ended requirements into shippable, testable increments.</li>
+            </ul>
+          </div>
+
+          <div class="post entry" style="--post-delay:.27s">
+            <div class="post-line">
+              <h4 class="post-title">Software Engineer Intern</h4>
+              <span class="post-dates">Jan 2021 — Sep 2021</span>
+            </div>
+            <ul class="duties">
+              <!-- Adjust these two to match what you actually did during the internship. -->
+              <li>Built responsive interfaces to design specification in HTML, SCSS, and JavaScript, working to the team's review standards.</li>
+              <li>Learned the codebase's React patterns and shipped supervised bug fixes and small features into production.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="stack">
+          <em>React.js</em><em>Next.js</em><em>TypeScript</em><em>JavaScript</em>
+          <em>SCSS</em><em>Laravel</em><em>PHP</em><em>MySQL</em><em>Git</em>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="head amber"><h2>Achievements</h2></div>
+        <ul class="marks">
+          <li>Competed in university-level collegiate programming contests.</li>
+          <li>First place, 100m sprint and long jump — university athletics tournament.</li>
+          <li>Organised university tech festivals, sports tournaments, and student events.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <!-- ── SIDEBAR ───────────────────────────────────── -->
+    <aside class="col aside">
+
+      <section class="reveal">
+        <div class="head"><h2>Skills</h2></div>
+
+        <div class="group">
+          <p class="group-label">Languages</p>
+          <div class="chips">
+            <span>TypeScript</span><span>JavaScript</span><span>PHP</span><span>SQL</span><span>C / C++</span>
+          </div>
+        </div>
+
+        <div class="group">
+          <p class="group-label">Frontend</p>
+          <div class="chips">
+            <span>React.js</span><span>Next.js</span><span>Redux</span><span>HTML5</span><span>CSS3</span><span>SCSS</span><span>Responsive UI</span>
+          </div>
+        </div>
+
+        <div class="group">
+          <p class="group-label">Backend &amp; Data</p>
+          <div class="chips">
+            <span>Laravel</span><span>REST APIs</span><span>MySQL</span><span>Schema design</span>
+          </div>
+        </div>
+
+        <div class="group">
+          <p class="group-label">Practice</p>
+          <div class="chips">
+            <span>Code review</span><span>Mentoring</span><span>Performance</span><span>Accessibility</span><span>SEO</span><span>Git &amp; CI</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="head amber"><h2>Education</h2></div>
+        <div class="edu-item">
+          <p class="degree">B.Sc. in Computer Science &amp; Engineering</p>
+          <p class="school">University of Information Technology &amp; Sciences (UITS), Dhaka</p>
+          <p class="stamp">Graduated 2019</p>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="head"><h2>Languages</h2></div>
+        <div class="pair"><b>Bangla</b><span>Native</span></div>
+        <div class="pair"><b>English</b><span>Professional</span></div>
+      </section>
+
+      <section class="reveal">
+        <div class="head"><h2>Interests</h2></div>
+        <p class="plain">Football, cricket, travel, music, drawing, and current affairs.</p>
+      </section>
+
+    </aside>
+
+  </div>
+</article>
+
+<button class="save" onclick="window.print()">Save as PDF</button>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  var targets = document.querySelectorAll('.reveal, .post');
+  if ('IntersectionObserver' in window && targets.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(function (el) { io.observe(el); });
+  } else {
+    targets.forEach(function (el) { el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
