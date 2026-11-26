@@ -511,6 +511,31 @@
     color: var(--amber-deep);
   }
 
+  .certs {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 22px;
+  }
+  .certs li {
+    padding: 8px 0 8px 12px;
+    border-left: 2px solid var(--teal-line);
+    transition: border-color .2s ease;
+  }
+  .certs li:hover { border-left-color: var(--teal); }
+  .certs .cert-name { font-size: 12.5px; font-weight: 700; line-height: 1.35; color: var(--ink); }
+  .certs .cert-meta {
+    margin-top: 2px;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+  }
+  .certs .cert-meta time {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--teal);
+  }
+
   .pair {
     display: flex;
     justify-content: space-between;
@@ -571,11 +596,16 @@
   }
 
   @media (max-width: 420px) {
+    .certs { grid-template-columns: 1fr; }
     .masthead-top { flex-direction: column-reverse; align-items: flex-start; }
   }
 
   /* ══ PRINT (A4) ══════════════════════════════════════ */
-  @page { size: A4; margin: 0; }
+  /* Side margins stay 0 so the masthead bleeds edge to edge; top/bottom
+     margins give continuation pages breathing room. Page 1 keeps no top
+     margin so the masthead still touches the top edge. */
+  @page { size: A4; margin: 7mm 0 3mm; }
+  @page :first { margin-top: 0; }
 
   @media print {
     html, body {
@@ -618,6 +648,24 @@
     .chips span { font-size: 8pt; padding: 2px 6px; }
     .post::before { border-color: #fff; }
     section, .post, .edu-item { break-inside: avoid; page-break-inside: avoid; }
+    /* Long list: let it flow across pages, but never split an entry
+       or strand the heading at the bottom of a page. */
+    .cert-section { break-inside: auto; page-break-inside: auto; }
+    .head { break-after: avoid; page-break-after: avoid; }
+    .certs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 16px;
+    }
+    .certs li {
+      margin-bottom: 0;
+      padding: 5px 0 5px 10px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .certs .cert-name { font-size: 9pt; }
+    .certs .cert-meta { font-size: 8pt; }
+    .certs .cert-meta time { font-size: 7.5pt; }
     .contact a { color: rgba(255,255,255,.85); }
     .save { display: none; }
     .masthead-text .name, .masthead-text .role, .portrait, .contact,
@@ -748,6 +796,22 @@
           <li>Competed in university-level collegiate programming contests.</li>
           <li>First place, 100m sprint and long jump — university athletics tournament.</li>
           <li>Organised university tech festivals, sports tournaments, and student events.</li>
+        </ul>
+      </section>
+
+      <section class="reveal cert-section">
+        <div class="head"><h2>Certifications &amp; Training</h2></div>
+        <ul class="certs">
+          <li><p class="cert-name">IS-101: Information Security</p><p class="cert-meta">BJIT LMS · <time>Nov 2025</time></p></li>
+          <li><p class="cert-name">Code of Conduct &amp; Global Awareness</p><p class="cert-meta">BJIT Academy · <time>Apr 2025</time></p></li>
+          <li><p class="cert-name">Information Security &amp; Management</p><p class="cert-meta">BJIT Academy · <time>Feb 2024</time></p></li>
+          <li><p class="cert-name">Mastering Soft Skills for Thriving in the Modern Workplace</p><p class="cert-meta">BJIT Academy · <time>Aug 2023</time></p></li>
+          <li><p class="cert-name">Understanding TypeScript</p><p class="cert-meta">Udemy · <time>May 2023</time></p></li>
+          <li><p class="cert-name">The Complete Node.js Developer Course (3rd Ed.)</p><p class="cert-meta">Udemy · <time>Sep 2022</time></p></li>
+          <li><p class="cert-name">Docker for Absolute Beginners</p><p class="cert-meta">Udemy · <time>May 2022</time></p></li>
+          <li><p class="cert-name">Scrum Team Member Accredited Certification</p><p class="cert-meta">International Scrum Institute · <time>Oct 2021</time></p></li>
+          <li><p class="cert-name">Fundamental Engineering Course</p><p class="cert-meta">BSDI &amp; BJIT Academy · <time>Oct 2021</time></p></li>
+          <li><p class="cert-name">Git &amp; Gerrit (3rd Batch)</p><p class="cert-meta">BJIT Academy · <time>Feb 2021</time></p></li>
         </ul>
       </section>
 
